@@ -76,6 +76,7 @@ tr {
   left: 480px;
   width: 122px;
   height: 122px;
+  z-index: 9999;
   background-repeat: no-repeat !important;
   background-size: 122px 122px !important;
   -moz-background-size: 122px 122px !important;

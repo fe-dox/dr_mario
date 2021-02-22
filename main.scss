@@ -82,6 +82,7 @@ tr {
   $width: 122px;
   width: $width;
   height: $width;
+  z-index: 9999;
   background-repeat: no-repeat !important;
   background-size: $width $width !important;
   -moz-background-size: $width $width !important;
@@ -92,7 +93,8 @@ tr {
   position: absolute;
   top: 8px;
   left: 328px;
-  td{
+
+  td {
     $width: 16px;
     width: $width;
     height: $width;

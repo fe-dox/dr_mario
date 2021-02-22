@@ -60,8 +60,6 @@ function createGame() {
                 break;
             case "ArrowDown":
             case "s":
-                // await game.Drop();
-                // game.OnRender();
                 game.gameState = GameState.Analysing;
                 while (await game.Drop()) {
                     game.OnRender();

@@ -381,7 +381,6 @@ export class Game {
     }
 
     public async Drop() {
-        console.log("drop");
         if (!this.MoveDown()) {
             this._gameState = GameState.Analysing;
             let z = 0;
@@ -409,7 +408,6 @@ export class Game {
                                 if (!element.isVirus && analysedIds.indexOf(element.id) === -1) {
                                     analysedIds.push(element.id);
                                     let coords = this.GetPillCoordinates(element.id);
-                                    console.log(element.id, coords);
                                     if (this.MoveDown(coords, coords.pillDirectionIsRight,
                                         coords.bottomLeft.Equals(coords.topLeft)
                                         && coords.bottomLeft.Equals(coords.bottomRight))) movedElements++;
