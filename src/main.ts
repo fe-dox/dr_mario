@@ -8,6 +8,7 @@ import {Store} from './Store.js';
 
 
 function createGame() {
+    document.getElementById("gameOverDoctor").style.background = "";
     let game = new Game();
     let gameArea = document.getElementById('gameArea');
     gameArea.innerHTML = '';
