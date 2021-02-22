@@ -43,7 +43,7 @@ function createGame() {
         game.OnRender();
     }, 1000);
 
-    document.addEventListener('keyup', async ev => {
+    document.addEventListener('keydown', async ev => {
         if (game.gameState !== GameState.Moving) return;
         switch (ev.key) {
             case "ArrowLeft":
