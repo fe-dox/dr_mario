@@ -9,7 +9,9 @@ import {Store} from './Store.js';
 
 function createGame() {
     document.getElementById("gameOverDoctor").style.background = "";
-    let game = new Game();
+    let pillAnimationDiv = document.getElementById("pillAnimation");
+    pillAnimationDiv.innerHTML = "";
+    let game = new Game(pillAnimationDiv);
     let gameArea = document.getElementById('gameArea');
     gameArea.innerHTML = '';
     let gameAreaArray = prepareGameAreaArray(GAME_HEIGHT, GAME_WIDTH, gameArea);

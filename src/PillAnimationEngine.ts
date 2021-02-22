@@ -1,4 +1,5 @@
 import {Colour} from './Colour.js';
+import Utils from './Utils.js';
 
 const WIDTH = 12;
 const HEIGHT = 8;
@@ -24,10 +25,18 @@ const FRAMES = [
     [2, 2, "right", 2, 1, "left"],
     [1, 1, "up", 2, 1, "down"],
     [2, 0, "left", 2, 1, "right"],
-    [3, 0, "left", 3, 1, "right"]
+    [3, 0, "left", 3, 1, "right"],
+    [4, 0, "left", 4, 1, "right"],
+    [5, 0, "left", 5, 1, "right"]
 ];
 
-class PillAnimation {
+const DR_FRAMES = [
+    [[6, 11, "down_1"], [7, 11, "down_2"]],
+    [[5, 10, "middle11"], [5, 11, "middle12"], [6, 10, "middle21"], [6, 11, "middle22"]],
+    [[4, 11, "up_1"], [5, 11, "up_2"], [6, 11, "up_3"]]
+];
+
+export class PillAnimationEngine {
 
     private readonly elementsArray: HTMLElement[][] = [];
     private currentFrame: number = 0;
@@ -48,31 +57,60 @@ class PillAnimation {
             table.appendChild(tr);
             this.elementsArray.push(tmpArr);
         }
+        mountPoint.appendChild(table);
     }
 
-    public NextFrame(): boolean {
+
+    public async RenderAllFrames(): Promise<boolean> {
+        while (this.NextFrame()) await Utils.Delay(50);
+        return true;
+    }
+
+    private NextFrame(): boolean {
         this.currentFrame++;
         if (this.currentFrame >= FRAMES.length) return false;
         this.RenderFrame();
         return true;
     }
 
-    public NewPill(colour1: Colour, colour2: Colour) {
+    public async NewPill(colour1: Colour, colour2: Colour) {
+        this.ClearAll();
         this.currentFrame = 0;
         this.pillColour1 = colour1;
         this.pillColour2 = colour2;
+        for (let i = 0; i < DR_FRAMES.length; i++) {
+            this.ClearAll();
+            this.RenderDrFrame(i);
+            await Utils.Delay(200);
+        }
         this.RenderFrame();
     }
 
-    public RenderFrame() {
-        let [p1y, p1x, p1direction, p2y, p2x, p2direction] = FRAMES[this.currentFrame];
+    private RenderDrFrame(frameId: number) {
+        for (const frameElement of DR_FRAMES[frameId]) {
+            this.elementsArray[frameElement[0]][frameElement[1]].style.background = "url('./img/hands/" + frameElement[2] + ".png')";
+        }
+    }
+
+    private ClearAll() {
         for (let i = 0; i < this.elementsArray.length; i++) {
             for (let j = 0; j < this.elementsArray[i].length; j++) {
-                if ((i === p1y && j === p1x) || (i === p2y || j === p2x)) continue;
                 this.elementsArray[i][j].style.background = "";
             }
         }
+    }
+
+    private RenderFrame() {
+        let [p1y, p1x, p1direction, p2y, p2x, p2direction] = FRAMES[this.currentFrame];
+        this.ClearAll();
         this.elementsArray[p1y][p1x].style.background = "url('./img/" + this.pillColour1 + "_" + p1direction + ".png')";
         this.elementsArray[p2y][p2x].style.background = "url('./img/" + this.pillColour2 + "_" + p2direction + ".png')";
+        if (this.currentFrame < 5) {
+            this.RenderDrFrame(2);
+        } else if (this.currentFrame < 10) {
+            this.RenderDrFrame(1);
+        } else {
+            this.RenderDrFrame(0);
+        }
     }
 }

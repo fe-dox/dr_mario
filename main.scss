@@ -14,7 +14,6 @@ table {
 td {
   width: 16px;
   height: 16px;
-  //border: 1px solid coral;
   box-sizing: border-box;
 }
 
@@ -87,4 +86,19 @@ tr {
   background-size: $width $width !important;
   -moz-background-size: $width $width !important;
   -webkit-background-size: $width $width !important;
+}
+
+#pillAnimation {
+  position: absolute;
+  top: 8px;
+  left: 328px;
+  td{
+    $width: 16px;
+    width: $width;
+    height: $width;
+    background-repeat: no-repeat !important;
+    background-size: $width $width !important;
+    -moz-background-size: $width $width !important;
+    -webkit-background-size: $width $width !important;
+  }
 }

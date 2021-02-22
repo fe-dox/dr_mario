@@ -2,6 +2,7 @@ import GameCell from "./GameCell.js";
 import {Colour} from './Colour.js';
 import Utils from './Utils.js';
 import GameElement from './GameElement.js';
+import {PillAnimationEngine} from './PillAnimationEngine.js';
 
 export const GAME_WIDTH = 8;
 export const GAME_HEIGHT = 16;
@@ -17,6 +18,8 @@ export class Game {
     private _currentScore: number = 0;
     private _gameState: GameState = GameState.NotReady;
     private _nextId: number = 0;
+    private _pillAnimationEngine: PillAnimationEngine;
+    private nextPillColours: Colour[] = [];
     private onVictory: Function;
     private renderFunction: Function;
     private onGameOver: Function;
@@ -28,7 +31,7 @@ export class Game {
 
     private gameTable: GameTable = [];
 
-    constructor() {
+    constructor(mountPoint: HTMLElement) {
         for (let i = 0; i < GAME_HEIGHT; i++) {
             let tmpArr = [];
             for (let j = 0; j < GAME_WIDTH; j++) {
@@ -37,6 +40,10 @@ export class Game {
             this.gameTable.push(tmpArr);
         }
         this.GenerateViruses(NUMBER_OF_VIRUSES);
+        let generator = new RandomGenerator(Colour.Blue, Colour.Brown, Colour.Yellow);
+        this.nextPillColours = [generator.Get(), generator.Get()];
+        this._pillAnimationEngine = new PillAnimationEngine(mountPoint);
+        this._pillAnimationEngine.NewPill(this.nextPillColours[0], this.nextPillColours[1]);
     }
 
     private GenerateViruses(numberOfViruses: number) {
@@ -88,21 +95,27 @@ export class Game {
         return map;
     }
 
-    public NextPill() {
+
+    public async NextPill() {
         if (this.gameState == GameState.Finished) return;
+        await this._pillAnimationEngine.RenderAllFrames();
         if (!this.gameTable[0][3].isEmpty() || !this.gameTable[0][4].isEmpty()) {
             this.gameState = GameState.Finished;
             this.onGameOver?.();
             return;
         }
-        let generator = new RandomGenerator(Colour.Blue, Colour.Brown, Colour.Yellow);
+
         let id = this.nextId;
-        this.gameTable[0][3] = new GameElement(id, generator.Get(), false);
-        this.gameTable[0][4] = new GameElement(id, generator.Get(), false);
+        this.gameTable[0][3] = new GameElement(id, this.nextPillColours[0], false);
+        this.gameTable[0][4] = new GameElement(id, this.nextPillColours[1], false);
         this._currentPillPositionX = 3;
         this._currentPillPositionY = 0;
         this._currentPillDirectionIsRight = true;
         this._gameState = GameState.Moving;
+        let generator = new RandomGenerator(Colour.Blue, Colour.Brown, Colour.Yellow);
+        this.nextPillColours = [generator.Get(), generator.Get()];
+        this._pillAnimationEngine.NewPill(this.nextPillColours[0], this.nextPillColours[1]);
+        this.OnRender();
     }
 
     private GetPillCoordinates(pillID: number, map: PillsMap = this.GetPillsMap()) {

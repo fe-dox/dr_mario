@@ -82,4 +82,18 @@ tr {
   -webkit-background-size: 122px 122px !important;
 }
 
+#pillAnimation {
+  position: absolute;
+  top: 8px;
+  left: 328px;
+}
+#pillAnimation td {
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat !important;
+  background-size: 16px 16px !important;
+  -moz-background-size: 16px 16px !important;
+  -webkit-background-size: 16px 16px !important;
+}
+
 /*# sourceMappingURL=main.css.map */
