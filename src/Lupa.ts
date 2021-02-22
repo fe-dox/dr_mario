@@ -38,12 +38,12 @@ export class Glass {
     }
 
     private RotateViruses() {
+        if (this.isGameOverModeEnabled) return;
         if (this.currentRotationID === Glass.locationsArray.length - 1) {
             this.currentRotationID = 0;
         } else {
             this.currentRotationID++;
         }
-        console.log(this.currentRotationID);
         for (let i = 0; i < this.mountPoints.length; i++) {
             this.mountPoints[i].style.top = Glass.locationsArray[this.currentRotationID][i].top + "px";
             this.mountPoints[i].style.left = Glass.locationsArray[this.currentRotationID][i].left + "px";

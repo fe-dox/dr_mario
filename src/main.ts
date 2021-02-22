@@ -210,7 +210,6 @@ function createGame() {
     async function victory() {
         endMessage.innerHTML = '<img src="./img/sc.png" alt="victory">';
         game.OnRender();
-        glass.EnableGameOverMode();
         await Utils.Delay(7000);
         createGame();
     }
