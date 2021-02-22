@@ -387,7 +387,6 @@ export class Game {
             let deleted = false;
             do {
                 deleted = false;
-                //TODO: Render delete
                 if (this.MarkGoingToBeDeletedCells(GAME_HEIGHT, GAME_WIDTH)) {
                     deleted = true;
                     this.OnRender();
