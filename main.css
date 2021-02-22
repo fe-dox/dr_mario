@@ -1,0 +1,85 @@
+table {
+  margin: 0;
+  padding: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+table * {
+  margin: 0;
+  padding: 0;
+}
+
+td {
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+}
+
+tr {
+  margin: 0;
+  padding: 0;
+}
+
+#gameArea {
+  position: absolute;
+  top: 102px;
+  left: 280px;
+}
+
+#endMessage {
+  position: absolute;
+  top: 150px;
+  left: 175px;
+  z-index: 10000;
+}
+
+.virus {
+  position: absolute;
+  width: 72px;
+  height: 56px;
+  background-repeat: no-repeat !important;
+  background-size: 72px 56px !important;
+  -moz-background-size: 72px 56px !important;
+  -webkit-background-size: 72px 56px !important;
+}
+
+#displays td {
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat !important;
+  background-size: 16px 16px !important;
+  -moz-background-size: 16px 16px !important;
+  -webkit-background-size: 16px 16px !important;
+}
+
+#highScore {
+  position: absolute;
+  top: 90px;
+  left: 90px;
+}
+
+#currentScore {
+  position: absolute;
+  top: 140px;
+  left: 90px;
+}
+
+#numberOfViruses {
+  position: absolute;
+  top: 350px;
+  left: 565px;
+}
+
+#gameOverDoctor {
+  position: absolute;
+  top: 49px;
+  left: 480px;
+  width: 122px;
+  height: 122px;
+  background-repeat: no-repeat !important;
+  background-size: 122px 122px !important;
+  -moz-background-size: 122px 122px !important;
+  -webkit-background-size: 122px 122px !important;
+}
+
+/*# sourceMappingURL=main.css.map */
