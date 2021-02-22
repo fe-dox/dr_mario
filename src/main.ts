@@ -114,6 +114,7 @@ function createGame() {
                                 htmlElement.style.background = "url('./img/yl_x.png')";
                                 break;
                             case Colour.Empty:
+                                htmlElement.style.background = "";
                                 break;
                         }
                     } else {
@@ -128,6 +129,7 @@ function createGame() {
                                 htmlElement.style.background = "url('./img/covid_yellow.png')";
                                 break;
                             case Colour.Empty:
+                                htmlElement.style.background = "";
                                 break;
                         }
                     }
@@ -144,6 +146,7 @@ function createGame() {
                                 htmlElement.style.background = "url('./img/yl_o.png')";
                                 break;
                             case Colour.Empty:
+                                htmlElement.style.background = "";
                                 break;
                         }
                     } else {
@@ -158,6 +161,7 @@ function createGame() {
                                 htmlElement.style.background = "url('./img/yl_dot.png')";
                                 break;
                             case Colour.Empty:
+                                htmlElement.style.background = "";
                                 break;
                         }
                     }
@@ -209,6 +213,7 @@ function createGame() {
 
     async function victory() {
         endMessage.innerHTML = '<img src="./img/sc.png" alt="victory">';
+        game.OnRender();
         game.OnRender();
         await Utils.Delay(7000);
         createGame();

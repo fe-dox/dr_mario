@@ -98,13 +98,12 @@ export class Game {
 
     public async NextPill() {
         if (this.gameState == GameState.Finished) return;
-        await this._pillAnimationEngine.RenderAllFrames();
         if (!this.gameTable[0][3].isEmpty() || !this.gameTable[0][4].isEmpty()) {
             this.gameState = GameState.Finished;
             this.onGameOver?.();
             return;
         }
-
+        await this._pillAnimationEngine.RenderAllFrames();
         let id = this.nextId;
         this.gameTable[0][3] = new GameElement(id, this.nextPillColours[0], false);
         this.gameTable[0][4] = new GameElement(id, this.nextPillColours[1], false);
@@ -368,7 +367,6 @@ export class Game {
                             this.onVictory?.();
                             this._gameState = GameState.Finished;
                             this.OnRenderResults();
-                            return;
                         }
                     }
                     this.gameTable[i][j] = GameCell.Empty;
